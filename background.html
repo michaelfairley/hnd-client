@@ -27,7 +27,7 @@
         var ids = curTabs[tab.id].split(',');
         for (id in ids) {
           var url = "http://news.ycombinator.com/item?id=" + ids[id];
-          chrome.tabs.create({'url': url});
+          chrome.tabs.create({'url': url, 'windowId': tab.windowId, 'index': tab.index+1});
         }
       };
       chrome.pageAction.onClicked.addListener(openHnPage);
