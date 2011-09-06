@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="md5.js"></script>
+    <script>
+      var curTabs = {};
+
+      function checkForHnId(tabId, changeInfo, tab) {
+        var xhr = new XMLHttpRequest();
+        var url_hash = hex_md5(tab.url);
+        xhr.open("GET", "http://hnd.mfairley.com/" + url_hash, true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+              curTabs[tabId] = xhr.responseText;
+              chrome.pageAction.show(tabId);
+            } else {
+              delete curTabs[tabId];
+              chrome.pageAction.hide(tabId);
+            }
+          }
+        }
+        xhr.send();
+      };
+      chrome.tabs.onUpdated.addListener(checkForHnId);
+
+      function openHnPage(tab) {
+        var url = "http://news.ycombinator.com/item?id=" + curTabs[tab.id];
+        chrome.tabs.create({'url': url});
+      };
+      chrome.pageAction.onClicked.addListener(openHnPage);
+    </script>
+  <head>
+</html>

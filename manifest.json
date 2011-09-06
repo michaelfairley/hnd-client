@@ -1,0 +1,19 @@
+{
+  "name": "Hacker New'd!",
+  "version": "1.0",
+  "description": "Lets you know if the page you're looking at has been discussed on Hacker News (and lets you jump straight to that disucssion).",
+  "background_page": "background.html",
+  "page_action": {
+    "default_icon": "icon-19.png",
+    "default_title": "See discusson about this page on HN"
+  },
+  "icons" : {
+    "16" : "icon-16.png",
+    "48" : "icon-48.png",
+    "128" : "icon-128.png"
+  },
+  "permissions": [
+    "http://hnd.mfairley.com/",
+    "tabs"
+  ]
+}
