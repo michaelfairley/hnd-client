@@ -5,23 +5,40 @@
       var curTabs = {};
 
       function checkForHnId(tabId, changeInfo, tab) {
+        delete curTabs[tabId];
+        chrome.pageAction.hide(tabId);
+        toggledUrl = toggleUrlHttps(tab.url);
+        if (toggledUrl !== "") {
+          checkUrl(tabId, tab.url);
+          checkUrl(tabId, toggledUrl);
+        }
+      };
+      chrome.tabs.onUpdated.addListener(checkForHnId);
+
+      function checkUrl(tabId, url) {
         var xhr = new XMLHttpRequest();
-        var url_hash = hex_md5(tab.url);
+        var url_hash = hex_md5(url);
         xhr.open("GET", "http://hnd.mfairley.com/" + url_hash, true);
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4) {
             if (xhr.status == 200) {
               curTabs[tabId] = xhr.responseText;
               chrome.pageAction.show(tabId);
-            } else {
-              delete curTabs[tabId];
-              chrome.pageAction.hide(tabId);
             }
           }
         }
         xhr.send();
-      };
-      chrome.tabs.onUpdated.addListener(checkForHnId);
+      }
+
+      function toggleUrlHttps(url) {
+        if (url.indexOf("http://") == 0) {
+          return url.slice(0, 4) + "s" + url.slice(4);
+        }
+        if (url.indexOf("https://") == 0) {
+          return url.slice(0, 4) + url.slice(5);
+        }
+        return "";
+      }
 
       function openHnPage(tab) {
         var ids = curTabs[tab.id].split(',');
@@ -32,5 +49,5 @@
       };
       chrome.pageAction.onClicked.addListener(openHnPage);
     </script>
-  <head>
+  </head>
 </html>

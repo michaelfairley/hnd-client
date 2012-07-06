@@ -1,6 +1,6 @@
 {
   "name": "Hacker News'd!",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Lets you know if the page you're looking at has been discussed on Hacker News (and lets you jump straight to that disucssion).",
   "background_page": "background.html",
   "page_action": {
