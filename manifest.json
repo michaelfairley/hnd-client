@@ -1,8 +1,10 @@
 {
   "name": "Hacker News'd!",
-  "version": "1.1",
+  "version": "1.2",
   "description": "Lets you know if the page you're looking at has been discussed on Hacker News (and lets you jump straight to that disucssion).",
-  "background_page": "background.html",
+  "background": {
+    "scripts": ["md5.js", "background.js"]
+  },
   "page_action": {
     "default_icon": "icon-19.png",
     "default_title": "See discusson about this page on HN"
@@ -13,7 +15,8 @@
     "128" : "icon-128.png"
   },
   "permissions": [
-    "http://hnd.mfairley.com/",
+    "https://hn.algolia.com/",
     "tabs"
-  ]
+  ],
+  "manifest_version": 2
 }
