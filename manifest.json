@@ -3,7 +3,8 @@
   "version": "1.2",
   "description": "Lets you know if the page you're looking at has been discussed on Hacker News (and lets you jump straight to that disucssion).",
   "background": {
-    "scripts": ["md5.js", "background.js"]
+    "scripts": ["md5.js", "background.js"],
+    "persistent": false
   },
   "page_action": {
     "default_icon": "icon-19.png",
